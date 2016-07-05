@@ -1,0 +1,31 @@
+{
+  "name": "uncharted-tactics",
+  "version": "1.0.0",
+  "description": "Uncharted Tactics",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "forever index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntonioVdlC/uncharted-tactics.git"
+  },
+  "author": "Antonio Villagra De La Cruz (antoniovdlc.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntonioVdlC/uncharted-tactics/issues"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "dependencies": {
+    "ejs": "^2.4.2",
+    "express": "^4.14.0",
+    "forever": "^0.15.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  }
+}

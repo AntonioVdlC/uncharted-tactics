@@ -1,6 +1,10 @@
 const express = require("express")
 const app = express()
 
+const login = require("./routes/login")
+const profile = require("./routes/profile")
+const game = require("./routes/game")
+
 // Templateing engine
 app.set("views", "./views")
 app.set("view engine", "ejs")
@@ -9,17 +13,9 @@ app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"))
 
 // Routes
-app.get("/", (req, res) => {
-    res.render("index")
-})
-
-app.get("/profile", (req, res) => {
-    res.render("profile")
-})
-
-app.get("/game", (req, res) => {
-    res.render("game")
-})
+app.use("/", login)
+app.use("/profile", profile)
+app.use("/game", game)
 
 // Port
 let port = process.env.PORT || 8080

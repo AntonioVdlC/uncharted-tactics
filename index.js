@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 
 const index = require("./routes/index")
+const auth = require("./routes/auth")
 const profile = require("./routes/profile")
 const game = require("./routes/game")
 
@@ -14,6 +15,7 @@ app.use(express.static(__dirname + "/public"))
 
 // Routes
 app.use("/", index)
+app.use("/auth", auth)
 app.use("/profile", profile)
 app.use("/game", game)
 

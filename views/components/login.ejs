@@ -1,9 +1,11 @@
 <div class="login">
-    <ul>
-        <li>Username</li>
-        <li><input type="text" value=""></li>
-        <li>Password</li>
-        <li><input type="password" value=""></li>
-    </ul>
-    <button class="login-button" id="login-button">Login</button>
+    <form action="/auth" method="post">
+        <ul>
+            <li>Username</li>
+            <li><input type="text" name="username"></li>
+            <li>Password</li>
+            <li><input type="password" name="password"></li>
+        </ul>
+        <input type="submit" class="login-button" value="Login">
+    </form>
 </div>

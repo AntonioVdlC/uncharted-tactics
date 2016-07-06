@@ -1,0 +1,31 @@
+<div class="game-board">
+    <div class="capture-player-1">
+        <p>Captured</p>
+        <ul id="captured-player-1"></ul>
+    </div>
+    
+    <div class="board-container">
+        <table class="board">
+            <thead>
+            </thead>
+
+            <tbody>
+                <% for (let i = 0; i < 9; i++) { %>
+                <tr>
+                    <% for (let j = 0; j < 9; j++) { %>
+                    <td id="<%=i%>-<%=j%>"><%=i%>-<%=j%></td>
+                    <% } %>
+                </tr>
+                <% } %>
+            </tbody>
+            
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="capture-player-2">
+        <p>Captured</p>
+        <ul id="captured-player-2"></ul>
+    </div>
+</div>

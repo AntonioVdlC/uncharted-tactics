@@ -1,0 +1,12 @@
+/* Game Board*/
+.game-board {
+    display: flex;
+}
+
+.board-container {
+    flex-grow: 1;
+}
+.board {
+    width: 100%;
+    text-align: center;
+}

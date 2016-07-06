@@ -2,12 +2,19 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    let userId = 1
-    res.redirect("/" + userId)
+    if (req.session.userId) {
+        res.redirect("/profile/" + req.session.userId)
+    } else {
+        res.redirect("/")
+    }
 })
 
 router.get("/:userId", (req, res) => {
-    res.render("profile")
+    if (req.session.userId) {
+        res.render("profile")
+    } else {
+        res.redirect("/")
+    }
 })
 
 module.exports = router

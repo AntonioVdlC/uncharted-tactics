@@ -2,7 +2,11 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    res.render("game")
+    if (req.session.userId) {
+        res.render("game")
+    } else {
+        res.redirect("/")
+    }
 })
 
 module.exports = router

@@ -10,15 +10,15 @@ app.use(express.static(__dirname + "/public"))
 
 // Routes
 app.get("/", (req, res) => {
-    res.render("pages/index")
+    res.render("index")
 })
 
 app.get("/profile", (req, res) => {
-    res.render("pages/profile")
+    res.render("profile")
 })
 
 app.get("/game", (req, res) => {
-    res.render("pages/game")
+    res.render("game")
 })
 
 // Port

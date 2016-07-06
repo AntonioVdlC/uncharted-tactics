@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 
-const login = require("./routes/login")
+const index = require("./routes/index")
 const profile = require("./routes/profile")
 const game = require("./routes/game")
 
@@ -13,7 +13,7 @@ app.set("view engine", "ejs")
 app.use(express.static(__dirname + "/public"))
 
 // Routes
-app.use("/", login)
+app.use("/", index)
 app.use("/profile", profile)
 app.use("/game", game)
 

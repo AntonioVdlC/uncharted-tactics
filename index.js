@@ -7,6 +7,7 @@ const index = require("./routes/index")
 const auth = require("./routes/auth")
 const profile = require("./routes/profile")
 const game = require("./routes/game")
+const logout = require("./routes/logout")
 
 // Templateing engine
 app.set("views", "./views")
@@ -34,6 +35,7 @@ app.use("/", index)
 app.use("/auth", auth)
 app.use("/profile", profile)
 app.use("/game", game)
+app.use("/logout", logout)
 
 // Port
 let port = process.env.PORT || 8080

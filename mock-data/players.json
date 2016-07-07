@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Player 1",
+        "password": "test",
+        "level": 1,
+        "ranking": 1
+    }
+    ,{
+        "id": 2,
+        "name": "Player 2",
+        "password": "test",
+        "level": 1,
+        "ranking": 2
+    }
+]

@@ -3,13 +3,18 @@ const bodyParser = require("body-parser")
 
 const router = express.Router()
 
-// Middleware
+// -- Mock Data -- \\
+const players = require("../mock-data/players")
+// -- Mock Data -- \\
+
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
 router.post("/", (req, res) => {
-    if ((req.body.username === "Player 1" || req.body.username === "Player 2") && req.body.password === "test") {
-        req.session.userId = (req.body.username === "Player 1") ? 1 : 2
+    let player = players.find((player) => player.name === req.body.username)
+
+    if (player && req.body.password === player.password) {
+        req.session.userId = player.id
         res.redirect("/profile/" + req.session.userId)
     } else {
         res.status(403).send("Wrong Login/Password.")

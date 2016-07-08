@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
 
     if (player && req.body.password === player.password) {
         req.session.player = player
-        res.redirect("/profile/" + req.session.player.id)
+        res.redirect("/profile")
     } else {
         res.status(403).send("Wrong Login/Password.")
     }

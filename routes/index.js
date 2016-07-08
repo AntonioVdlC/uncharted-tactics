@@ -3,7 +3,7 @@ const router = express.Router()
 
 router.get("/", (req, res) => {
     if (req.session.player) {
-        res.redirect("/profile/" + req.session.player.id)
+        res.redirect("/profile")
     } else {
         res.render("index")
     }

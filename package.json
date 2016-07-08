@@ -25,7 +25,8 @@
     "ejs": "^2.4.2",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
-    "forever": "^0.15.2"
+    "forever": "^0.15.2",
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {
     "nodemon": "^1.9.2"

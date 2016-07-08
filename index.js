@@ -3,6 +3,9 @@ const session = require("express-session")
 
 const app = express()
 
+const server = app.listen(process.env.PORT || 8080)
+const io = require("socket.io")(server)
+
 const index = require("./routes/index")
 const auth = require("./routes/auth")
 const profile = require("./routes/profile")
@@ -13,11 +16,24 @@ const logout = require("./routes/logout")
 app.set("views", "./views")
 app.set("view engine", "ejs")
 
+// Socket.IO
+io.on("connection", (socket) => {
+    let session = socket.request.session
+    
+    if (session.player) {
+        console.log("IN :: " + session.player.name)
+
+        socket.on("disconnect", () => {
+            console.log("OUT :: " + session.player.name)
+        })
+    }
+})
+
 // Static files
 app.use(express.static(__dirname + "/public"))
 
 // Session
-app.use(session({
+let sessionMiddleware = session({
     name: process.env.SESSION_NAME || "session",
     secret: process.env.SESSION_SECRET || "S3CR37!",
     resave: false,
@@ -28,7 +44,12 @@ app.use(session({
         path: process.env.COOKIE_PATH || "/",
         maxAge: 60 * 60 * 1000 // 1 hour
     }
-}))
+})
+
+app.use(sessionMiddleware)
+io.use((socket, next) => {
+    sessionMiddleware(socket.request, socket.request.res, next)
+})
 
 // Routes
 app.use("/", index)
@@ -36,9 +57,3 @@ app.use("/auth", auth)
 app.use("/profile", profile)
 app.use("/game", game)
 app.use("/logout", logout)
-
-// Port
-let port = process.env.PORT || 8080
-app.listen(port, () => {
-    console.log("Listening on port " + port + " ...")
-})

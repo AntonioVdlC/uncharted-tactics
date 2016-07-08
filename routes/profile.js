@@ -2,15 +2,15 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", (req, res) => {
-    if (req.session.userId) {
-        res.redirect("/profile/" + req.session.userId)
+    if (req.session.player) {
+        res.redirect("/profile/" + req.session.player.id)
     } else {
         res.redirect("/")
     }
 })
 
 router.get("/:userId", (req, res) => {
-    if (req.session.userId) {
+    if (req.session.player) {
         res.render("profile", {
             player: req.session.player
         })

@@ -1,10 +1,6 @@
 const express = require("express")
 const router = express.Router()
 
-// -- Mock Data -- \\
-const players = require("../mock-data/players")
-// -- Mock Data -- \\
-
 router.get("/", (req, res) => {
     if (req.session.userId) {
         res.redirect("/profile/" + req.session.userId)
@@ -15,7 +11,9 @@ router.get("/", (req, res) => {
 
 router.get("/:userId", (req, res) => {
     if (req.session.userId) {
-        res.render("profile", players.find((player) => player.id === req.session.userId))
+        res.render("profile", {
+            player: req.session.player
+        })
     } else {
         res.redirect("/")
     }

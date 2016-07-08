@@ -3,7 +3,9 @@ const router = express.Router()
 
 router.get("/", (req, res) => {
     if (req.session.userId) {
-        res.render("game")
+        res.render("game", {
+            player: req.session.player
+        })
     } else {
         res.redirect("/")
     }

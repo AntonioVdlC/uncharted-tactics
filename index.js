@@ -6,6 +6,8 @@ const app = express()
 const server = app.listen(process.env.PORT || 8080)
 const io = require("socket.io")(server)
 
+const socket = require("./utils/socket")
+
 const index = require("./routes/index")
 const auth = require("./routes/auth")
 const profile = require("./routes/profile")
@@ -17,17 +19,7 @@ app.set("views", "./views")
 app.set("view engine", "ejs")
 
 // Socket.IO
-io.on("connection", (socket) => {
-    let session = socket.request.session
-    
-    if (session.player) {
-        console.log("IN :: " + session.player.name)
-
-        socket.on("disconnect", () => {
-            console.log("OUT :: " + session.player.name)
-        })
-    }
-})
+socket(io)
 
 // Static files
 app.use(express.static(__dirname + "/public"))

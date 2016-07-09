@@ -1,30 +1,53 @@
 const socket = function (io) {
     io.on("connection", (socket) => {
         let session = socket.request.session
-        let rooms = Object.keys(socket.adapter.rooms).map((id) => {
-            return {
-                id: id,
-                length: socket.adapter.rooms[id].length
-            }
-        })
+        let rooms = getRooms(socket)
         
         if (session.player) {
             console.log("IN :: " + session.player.name)
-            if (rooms.some((room) => room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id)) {
-                let room = rooms.filter(room => room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id)[0]
+            if (isAvailableRoom(rooms, socket, io, session)) {
+                let room = getAvailableRoom(rooms, socket, io, session)
                 
                 socket.leave(socket.id)
                 socket.join(room.id)
-                
-                console.log(socket.adapter.rooms[room.id])
-                for (let socketId in socket.adapter.rooms[room.id].sockets)
-                    console.log(io.sockets.connected[socketId].request.session.player.name)
+
+                io.sockets.in(room.id).emit("room", {
+                    id: room.id,
+                    players: getPlayers(room, socket, io)
+                })
             }
 
             socket.on("disconnect", () => {
                 console.log("OUT :: " + session.player.name)
             })
         }
+    })
+}
+
+function getRooms (socket) {
+    return Object.keys(socket.adapter.rooms).map((id) => {
+        return {
+            id: id,
+            length: socket.adapter.rooms[id].length
+        }
+    })
+}
+
+function getAvailableRoom (rooms, socket, io, session) {
+    return rooms.filter((room) => {
+        return room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id
+    })[0]
+}
+
+function getPlayers (room, socket, io) {
+    return (Object.keys(socket.adapter.rooms[room.id].sockets).map(socket => {
+        return io.sockets.connected[socket].request.session.player
+    }))
+}
+
+function isAvailableRoom (rooms, socket, io, session) {
+    return rooms.some((room) => {
+        return room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id
     })
 }
 

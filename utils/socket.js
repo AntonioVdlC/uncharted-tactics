@@ -11,7 +11,7 @@ const socket = function (io) {
                 socket.leave(socket.id)
                 socket.join(room.id)
 
-                io.sockets.in(room.id).emit("room", {
+                io.sockets.in(room.id).emit("game", {
                     id: room.id,
                     players: getPlayers(room, socket, io)
                 })

@@ -1,7 +1,7 @@
 const tileTypes = [
-    "Plain", 
-    "Hill", 
-    "River"
+    "plain", 
+    "hill", 
+    "river"
 ]
 
 const fieldLength = 9
@@ -16,9 +16,15 @@ const generateField = function () {
         for (let j = 0; j < fieldWidth; j++) {
             if (i === 0 || i === fieldLength - 1) {
                 // The first and last rows are always Plain
-                field[i].push("Plain")
+                field[i].push({
+                    type: "plain",
+                    piece: ""
+                })
             } else {
-                field[i].push(getRandomElementFrom(tileTypes))
+                field[i].push({
+                    type: getRandomElementFrom(tileTypes),
+                    piece: ""
+                })
             }
         }
     }

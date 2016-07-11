@@ -24,6 +24,9 @@
 .river {
     background-color: darkblue;
 }
+.forbidden {
+    opacity: 0.5
+}
 
 .capture {
     min-width: 10%

@@ -1,5 +1,6 @@
 const generateField = require("./generateField")
 
+let kings = []
 const socket = function (io) {
     io.on("connection", (socket) => {
         let session = socket.request.session
@@ -19,6 +20,13 @@ const socket = function (io) {
                     field: generateField()
                 })
             }
+
+            socket.on("king", (data) => {
+                kings.push(data.position)
+                
+                if (kings.length === 2)
+                    io.sockets.in(data.room).emit("king", kings)
+            })
 
             socket.on("disconnect", () => {
                 console.log("OUT :: " + session.player.name)

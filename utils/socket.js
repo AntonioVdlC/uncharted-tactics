@@ -1,3 +1,5 @@
+const generateField = require("./generateField")
+
 const socket = function (io) {
     io.on("connection", (socket) => {
         let session = socket.request.session
@@ -13,7 +15,8 @@ const socket = function (io) {
 
                 io.sockets.in(room.id).emit("game", {
                     id: room.id,
-                    players: getPlayers(room, socket, io)
+                    players: getPlayers(room, socket, io),
+                    field: generateField()
                 })
             }
 

@@ -1,6 +1,9 @@
 const socket = io()
 socket.on("game", (data) => {
     console.log(data)
+
+    let players = data.players
+    let field = data.field
     
     // Cache DOM elements
     let $players = document.getElementById("players")
@@ -10,20 +13,20 @@ socket.on("game", (data) => {
     let $capture2 = document.getElementById("capture-player-2")
 
     // Display players and field
-    $players.innerHTML = displayPlayers(data.players)
-    $field.innerHTML = displayField(data.field)
+    $players.innerHTML = displayPlayers(players)
+    $field.innerHTML = displayField(field)
     $info.innerHTML = ""
 
     // Position rival's King
     $info.innerHTML = "Place the rival's King in the last row!"
-    if (player.id === data.players[0].id) {
+    if (player.id === players[0].id) {
         $capture1.innerHTML = `<span class="place-king" id="place-king">K</span>`
     } else {
         $capture2.innerHTML = `<span class="place-king" id="place-king">K</span>`
     }
 
     document.getElementById("place-king").addEventListener("click", (e) => {
-        prepareFieldForKingPlacing(data.field, player, data.players, data.id)
+        prepareFieldForKingPlacing(field, player, players, data.id)
     })
 
     socket.on("king", (data) => {
@@ -38,6 +41,7 @@ socket.on("game", (data) => {
 
         // Position own's pieces
         $info.innerHTML = "Position your own pieces ..."
+        $info.innerHTML += `<br>Points available: <span id="available-points">` + calculateAvailblePoints(player, players) + `</span>`
     })
 
     // Start game
@@ -109,5 +113,15 @@ function prepareFieldForKingPlacing (field, player, players, room) {
                 })
             }
         }
+    }
+}
+
+function calculateAvailblePoints (player, players) {
+    let rival = players.find((p) => p.id !== player.id)
+
+    if (rival.level >= player.level) {
+        return 33
+    } else {
+        return 33 - (player.level - rival.level)
     }
 }

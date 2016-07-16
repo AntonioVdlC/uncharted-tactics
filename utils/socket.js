@@ -1,5 +1,6 @@
 const generateField = require("./generateField")
 
+let games = []
 let kings = []
 const socket = function (io) {
     io.on("connection", (socket) => {
@@ -9,16 +10,20 @@ const socket = function (io) {
         if (session.player) {
             console.log("IN :: " + session.player.name)
             if (isAvailableRoom(rooms, socket, io, session)) {
-                let room = getAvailableRoom(rooms, socket, io, session)
-                
+                let room = getAvailableRooms(rooms, socket, io, session)[0]
+
                 socket.leave(socket.id)
                 socket.join(room.id)
 
-                io.sockets.in(room.id).emit("game", {
-                    id: room.id,
+                let game = {
+                    room: room.id,
                     players: getPlayers(room, socket, io),
                     field: generateField()
-                })
+                }
+
+                io.sockets.in(room.id).emit("game", game)
+
+                games.push(game)
             }
 
             socket.on("king", (data) => {
@@ -44,10 +49,10 @@ function getRooms (socket) {
     })
 }
 
-function getAvailableRoom (rooms, socket, io, session) {
+function getAvailableRooms (rooms, socket, io, session) {
     return rooms.filter((room) => {
         return room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id
-    })[0]
+    })
 }
 
 function getPlayers (room, socket, io) {

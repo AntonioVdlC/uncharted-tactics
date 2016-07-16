@@ -2,6 +2,7 @@ const socket = io()
 socket.on("game", (data) => {
     console.log(data)
 
+    let room = data.room
     let players = data.players
     let field = data.field
     
@@ -26,7 +27,7 @@ socket.on("game", (data) => {
     }
 
     document.getElementById("place-king").addEventListener("click", (e) => {
-        prepareFieldForKingPlacing(field, player, players, data.id)
+        prepareFieldForKingPlacing(field, player, players, room)
     })
 
     socket.on("king", (data) => {

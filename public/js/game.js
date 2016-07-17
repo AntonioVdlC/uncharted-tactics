@@ -5,7 +5,46 @@ socket.on("game", (data) => {
     let room = data.room
     let players = data.players
     let field = data.field
-    
+
+    let fieldLength = field.length
+    let fieldWidth = field[0].length
+
+    let playerNumber = players.findIndex((p) => p.id === player.id) + 1
+
+    let pieces = [
+        {
+            "name": "Pawn",
+            "value": 1
+        },{
+            "name": "Lancer",
+            "value": 2
+        },{
+            "name": "Slinger",
+            "value": 1
+        },{
+            "name": "Lord",
+            "value": 2
+        },{
+            "name": "Knight",
+            "value": 3
+        },{
+            "name": "Bishop",
+            "value": 3
+        },{
+            "name": "Archer",
+            "value": 2
+        },{
+            "name": "Tower",
+            "value": 3
+        },{
+            "name": "Royal Guard",
+            "value": 3
+        },{
+            "name": "General",
+            "value": 4
+        }
+    ]
+
     // Cache DOM elements
     let $players = document.getElementById("players")
     let $field = document.getElementById("field")
@@ -35,14 +74,38 @@ socket.on("game", (data) => {
         ;[].forEach.call(document.querySelectorAll(".forbidden"), (tile) => {
             tile.classList.remove("forbidden")
         })
+        for (let i = 0; i < fieldLength; i++) {
+            for (let j = 0; j < fieldWidth; j++) {
+                document.getElementById(i + "-" + j).removeEventListener("click", null)
+            }
+        }
+
         document.getElementById(data[0].i + "-" + data[0].j).innerHTML = "K"
         document.getElementById(data[1].i + "-" + data[1].j).innerHTML = "K"
 
         $info.innerHTML = ""
 
         // Position own's pieces
-        $info.innerHTML = "Position your own pieces ..."
+        $info.innerHTML = "Select your pieces for this game ..."
         $info.innerHTML += `<br>Points available: <span id="available-points">` + calculateAvailblePoints(player, players) + `</span>`
+        $info.innerHTML += `
+            <div class="pieces-container" id="pieces-container">
+                  ${pieces.map((piece) => {
+                      return `
+                        <span class="piece" id="` + piece.name.toLocaleLowerCase().replace(/ /g, "-") +`">
+                            ${piece.name}
+                        </span>`
+                  })}
+            </div>
+        `
+        Array.from(document.querySelectorAll(".piece")).forEach((piece) => {
+            piece.addEventListener("click", (e) => {
+                let id = e.target.id
+                let piece = pieces.find(piece => piece.name.toLocaleLowerCase().replace(/ /g, "-") === id)
+                
+                addPiece(piece, playerNumber)
+            })
+        })
     })
 
     // Start game
@@ -124,5 +187,26 @@ function calculateAvailblePoints (player, players) {
         return 33
     } else {
         return 33 - (player.level - rival.level)
+    }
+}
+
+function addPiece (piece, playerNumber) {
+    let $points = document.getElementById("available-points")
+    let $info = document.getElementById("info")
+
+    let currentPoints = parseInt($points.innerHTML, 10)
+    let availablePoints = currentPoints - piece.value
+
+    if (availablePoints >= 0) {
+        let $capture = document.getElementById("capture-player-" + playerNumber)
+
+        $capture.innerHTML += `<p>${piece.name}</p>`
+    } 
+    
+    if (availablePoints > 0) {
+        $points.innerHTML = availablePoints
+    } else {
+        document.getElementById("pieces-container").remove()
+        $info.innerHTML = `<p>Place your selected pieces on the field ...</p><p><button id="start-game">Start</button></p>`
     }
 }

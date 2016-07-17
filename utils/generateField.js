@@ -8,13 +8,11 @@ const generateField = function (length, width, tileTypes, tileSelectionFn) {
             if (i === 0 || i === length - 1) {
                 // The first and last rows are always Plain
                 field[i].push({
-                    type: "plain",
-                    piece: ""
+                    type: "plain"
                 })
             } else {
                 field[i].push({
-                    type: tileSelectionFn(tileTypes),
-                    piece: ""
+                    type: tileSelectionFn(tileTypes)
                 })
             }
         }

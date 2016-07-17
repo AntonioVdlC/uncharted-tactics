@@ -129,7 +129,7 @@ function displayField (field) {
     for (let i = 0; i < fieldLength; i++) {
         fieldHTML += `<tr>`
         for (let j = 0; j < fieldWidth; j++) {
-            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${field[i][j].piece}</td>`
+            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${(field[i][j].piece) ? field[i][j].piece : ""}</td>`
         }
         fieldHTML += `</tr>`
     }

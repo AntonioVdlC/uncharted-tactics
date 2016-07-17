@@ -2,10 +2,10 @@
   "name": "uncharted-tactics",
   "version": "1.0.0",
   "description": "Uncharted Tactics",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "forever index.js",
+    "dev": "nodemon server.js",
+    "start": "forever server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

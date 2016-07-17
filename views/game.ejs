@@ -19,13 +19,8 @@
         </header>
 
         <main>
-            <p id="players"></p>
-            <p id="info">Waiting for another player to join ...</p>
-            <div class="game-board">
-                <div id="capture-player-1" class="capture"></div>
-                <div id="field" class="board-container"></div>
-                <div id="capture-player-2" class="capture"></div>
-            </div>
+            <%- include("components/game-info") %>
+            <%- include("components/game-board") %>
         </main>
 
         <footer>

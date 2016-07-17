@@ -1,20 +1,11 @@
-const tileTypes = [
-    "plain", 
-    "hill", 
-    "river"
-]
-
-const fieldLength = 9
-const fieldWidth = 9
-
-const generateField = function () {
+const generateField = function (length, width, tileTypes, tileSelectionFn) {
     const field = []
 
-    for (let i = 0; i < fieldLength; i++) {
+    for (let i = 0; i < length; i++) {
         field.push([])
 
-        for (let j = 0; j < fieldWidth; j++) {
-            if (i === 0 || i === fieldLength - 1) {
+        for (let j = 0; j < width; j++) {
+            if (i === 0 || i === length - 1) {
                 // The first and last rows are always Plain
                 field[i].push({
                     type: "plain",
@@ -22,7 +13,7 @@ const generateField = function () {
                 })
             } else {
                 field[i].push({
-                    type: getRandomElementFrom(tileTypes),
+                    type: tileSelectionFn(tileTypes),
                     piece: ""
                 })
             }
@@ -30,10 +21,6 @@ const generateField = function () {
     }
 
     return field
-}
-
-function getRandomElementFrom (array) {
-    return array[Math.floor(Math.random() * array.length)]
 }
 
 module.exports = generateField

@@ -1,4 +1,6 @@
-const generateField = require("./generateField")
+const config = require("../config/field")
+const getRandomElementFrom = require("../utils/getRandomElementFromArray")
+const generateField = require("../utils/generateField")
 
 const games = []
 
@@ -18,7 +20,12 @@ const socket = function (io) {
                 let game = {
                     room: room.id,
                     players: getPlayers(room, socket, io),
-                    field: generateField()
+                    field: generateField(
+                        config.fieldLength,
+                        config.fieldWidth,
+                        config.tileTypes,
+                        getRandomElementFrom
+                    )
                 }
 
                 io.sockets.in(room.id).emit("game", game)

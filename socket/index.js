@@ -1,29 +1,39 @@
-const config = require("../config/field")
+const config = {
+    field: require("../config/field")
+}
+
+const getPlayers = require("../utils/getPlayers")
 const getRandomElementFrom = require("../utils/getRandomElementFromArray")
+const getRooms = require("../utils/getRooms")
 const generateField = require("../utils/generateField")
+const isAvailableRoom = require("../utils/isAvailableRoom")
 
 const games = []
 
 const socket = function (io) {
     io.on("connection", (socket) => {
-        let session = socket.request.session
-        let rooms = getRooms(socket)
-        
-        if (session.player) {
-            console.log("IN :: " + session.player.name)
-            if (isAvailableRoom(rooms, socket, io, session)) {
-                let room = getAvailableRooms(rooms, socket, io, session)[0]
+        if (socket.request.session.player) {
+            console.log("IN :: " + socket.request.session.player.name)
+
+            let session = socket.request.session
+            let rooms = getRooms(io.sockets, socket.adapter.rooms, session)
+
+            if (rooms.some(isAvailableRoom)) {
+                let room = rooms.filter(isAvailableRoom)[0]
 
                 socket.leave(socket.id)
                 socket.join(room.id)
 
                 let game = {
                     room: room.id,
-                    players: getPlayers(room, socket, io),
+                    players: getPlayers(
+                        socket.adapter.rooms[room.id], 
+                        io.sockets
+                    ),
                     field: generateField(
-                        config.fieldLength,
-                        config.fieldWidth,
-                        config.tileTypes,
+                        config.field.length,
+                        config.field.width,
+                        config.field.tileTypes,
                         getRandomElementFrom
                     )
                 }
@@ -47,36 +57,9 @@ const socket = function (io) {
             })
 
             socket.on("disconnect", () => {
-                console.log("OUT :: " + session.player.name)
+                console.log("OUT :: " + socket.request.session.player.name)
             })
         }
-    })
-}
-
-function getRooms (socket) {
-    return Object.keys(socket.adapter.rooms).map((id) => {
-        return {
-            id: id,
-            length: socket.adapter.rooms[id].length
-        }
-    })
-}
-
-function getAvailableRooms (rooms, socket, io, session) {
-    return rooms.filter((room) => {
-        return room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id
-    })
-}
-
-function getPlayers (room, socket, io) {
-    return (Object.keys(socket.adapter.rooms[room.id].sockets).map(socket => {
-        return io.sockets.connected[socket].request.session.player
-    }))
-}
-
-function isAvailableRoom (rooms, socket, io, session) {
-    return rooms.some((room) => {
-        return room.length === 1 && io.sockets.connected[Object.keys(socket.adapter.rooms[room.id].sockets)[0]].request.session.player.id !== session.player.id
     })
 }
 

@@ -4,8 +4,8 @@ const field = {
         "hill", 
         "river"
     ],
-    fieldLength: 9,
-    fieldWidth: 9
+    length: 9,
+    width: 9
 }
 
 module.exports = field

@@ -1,7 +1,7 @@
 const generateField = require("./generateField")
 
-let games = []
-let kings = []
+const games = []
+
 const socket = function (io) {
     io.on("connection", (socket) => {
         let session = socket.request.session
@@ -23,14 +23,20 @@ const socket = function (io) {
 
                 io.sockets.in(room.id).emit("game", game)
 
-                games.push(game)
+                games[room.id] = game
+                games[room.id].kings = []
             }
 
             socket.on("king", (data) => {
-                kings.push(data.position)
+                let room = data.room
+                let position = data.position
+
+                let kings = games[room].kings
+
+                kings.push(position)
                 
                 if (kings.length === 2)
-                    io.sockets.in(data.room).emit("king", kings)
+                    io.sockets.in(room).emit("king", kings)
             })
 
             socket.on("disconnect", () => {

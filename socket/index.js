@@ -7,6 +7,7 @@ const getRandomElementFrom = require("../utils/getRandomElementFromArray")
 const getRooms = require("../utils/getRooms")
 const generateField = require("../utils/generateField")
 const isAvailableRoom = require("../utils/isAvailableRoom")
+const updateField = require("../utils/updateField")
 
 const games = {}
 const sockets = {}
@@ -64,12 +65,23 @@ const socket = function (io) {
                 let position = data.position
 
                 let kings = games[room].kings
+                let field = games[room].field
 
                 kings.push(position)
                 
+                field = updateField(field, {
+                    type: "move", 
+                    piece: "King",
+                    player: sockets[socket.id].request.session.player.id,
+                    start: null, 
+                    end: position
+                })
+
                 if (kings.length === 2) {
                     games[room].sockets.forEach((socket) => {
-                        sockets[socket].emit("king", kings)
+                        sockets[socket].emit("king", {
+                            field: field
+                        })
                     })
                 }
             })

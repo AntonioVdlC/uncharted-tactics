@@ -70,17 +70,9 @@ socket.on("game", (data) => {
 
     socket.on("king", (data) => {
         console.log(data)
-        ;[].forEach.call(document.querySelectorAll(".forbidden"), (tile) => {
-            tile.classList.remove("forbidden")
-        })
-        for (let i = 0; i < fieldLength; i++) {
-            for (let j = 0; j < fieldWidth; j++) {
-                document.getElementById(i + "-" + j).removeEventListener("click", null)
-            }
-        }
-
-        document.getElementById(data[0].i + "-" + data[0].j).innerHTML = "K"
-        document.getElementById(data[1].i + "-" + data[1].j).innerHTML = "K"
+        
+        field = data.field
+        $field.innerHTML = displayField(field)
 
         $info.innerHTML = ""
 

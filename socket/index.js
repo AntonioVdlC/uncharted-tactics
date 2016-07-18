@@ -38,19 +38,25 @@ const socket = function (io) {
                         config.field.width,
                         config.field.tileTypes,
                         getRandomElementFrom
-                    )
+                    ),
+                    sockets: [
+                        socket.id,
+                        room.id
+                    ]
                 }
 
                 sockets[socket.id].room = room.id
                 sockets[room.id].room = room.id
 
-                io.sockets.in(room.id).emit("game", {
-                    players: game.players,
-                    field: game.field
-                })
-
                 games[room.id] = game
                 games[room.id].kings = []
+
+                games[sockets[socket.id].room].sockets.forEach((socket) => {
+                    sockets[socket].emit("game", {
+                        players: game.players,
+                        field: game.field
+                    })
+                })
             }
 
             socket.on("king", (data) => {
@@ -61,8 +67,11 @@ const socket = function (io) {
 
                 kings.push(position)
                 
-                if (kings.length === 2)
-                    io.sockets.in(room).emit("king", kings)
+                if (kings.length === 2) {
+                    games[room].sockets.forEach((socket) => {
+                        sockets[socket].emit("king", kings)
+                    })
+                }
             })
 
             socket.on("disconnect", () => {

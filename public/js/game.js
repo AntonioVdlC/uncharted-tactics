@@ -2,7 +2,6 @@ const socket = io()
 socket.on("game", (data) => {
     console.log(data)
 
-    let room = data.room
     let players = data.players
     let field = data.field
 
@@ -66,7 +65,7 @@ socket.on("game", (data) => {
     }
 
     document.getElementById("place-king").addEventListener("click", (e) => {
-        prepareFieldForKingPlacing(field, player, players, room)
+        prepareFieldForKingPlacing(field, player, players)
     })
 
     socket.on("king", (data) => {
@@ -139,7 +138,7 @@ function displayField (field) {
     return fieldHTML
 }
 
-function prepareFieldForKingPlacing (field, player, players, room) {
+function prepareFieldForKingPlacing (field, player, players) {
     let fieldLength = field.length
     let fieldWidth = field[0].length
 
@@ -165,7 +164,6 @@ function prepareFieldForKingPlacing (field, player, players, room) {
 
                     // Emit socket message
                     socket.emit("king", {
-                        room: room,
                         position: {
                             i: i,
                             j: j

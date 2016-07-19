@@ -4,6 +4,7 @@ socket.on("game", (data) => {
 
     let players = data.players
     let field = data.field
+    let captured = data.captured
 
     let fieldLength = field.length
     let fieldWidth = field[0].length
@@ -128,6 +129,17 @@ function displayField (field) {
     fieldHTML += `</table>`
 
     return fieldHTML
+}
+
+function displayCaptured (captured) {
+    let capturedHTML = ``
+
+    capturedHTML += `<span class="">${5 - captured.back}</span>`
+    capturedHTML += captured.pieces.reduce((html, piece) => {
+        return `<span id="" class="">${piece.name}</span>`
+    }, ``)
+
+    return capturedHTML
 }
 
 function prepareFieldForKingPlacing (field, player, players) {

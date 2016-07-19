@@ -55,7 +55,8 @@ const socket = function (io) {
                 games[sockets[socket.id].room].sockets.forEach((socket) => {
                     sockets[socket].emit("game", {
                         players: game.players,
-                        field: game.field
+                        field: game.field,
+                        captured: game.field.captured
                     })
                 })
             }
@@ -80,7 +81,8 @@ const socket = function (io) {
                 if (kings.length === 2) {
                     games[room].sockets.forEach((socket) => {
                         sockets[socket].emit("king", {
-                            field: field
+                            field: field,
+                            captured: field.captured
                         })
                     })
                 }

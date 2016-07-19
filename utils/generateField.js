@@ -18,6 +18,14 @@ const generateField = function (length, width, tileTypes, tileSelectionFn) {
         }
     }
 
+    field.captured = [{
+        back: 0,
+        pieces: []
+    },{
+        back: 0,
+        pieces: []
+    }]
+
     return field
 }
 

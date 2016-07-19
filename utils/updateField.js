@@ -1,5 +1,6 @@
 const updateField = function (field, action) {
     let newField = Array.from(field)
+    newField.captured = Array.from(field.captured)
     
     if (action.type === "move") {
         if (action.start) {

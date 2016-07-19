@@ -25,7 +25,14 @@
     background-color: darkblue;
 }
 .forbidden {
-    opacity: 0.5
+    opacity: 0.5;
+}
+
+.player-1 {
+    color: white;
+}
+.player-2 {
+    color: black;
 }
 
 .capture {

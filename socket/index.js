@@ -73,7 +73,7 @@ const socket = function (io) {
                 field = updateField(field, {
                     type: "move", 
                     piece: "King",
-                    player: sockets[socket.id].request.session.player.id,
+                    player: games[room].sockets.indexOf(socket.id) + 1,
                     start: null, 
                     end: position
                 })

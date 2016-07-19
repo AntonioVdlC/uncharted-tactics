@@ -6,7 +6,10 @@ const updateField = function (field, action) {
         if (action.start) {
             delete newField[action.start.i][action.start.j].piece
         }
-        newField[action.end.i][action.end.j].piece = action.piece
+        newField[action.end.i][action.end.j].piece = {
+            type: action.piece,
+            player: action.player
+        }
     } else if (action.type === "capture") {
         console.log("TODO ...")
     } else {

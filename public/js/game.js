@@ -38,10 +38,10 @@ socket.on("game", (data) => {
             "value": 3
         },{
             "name": "Royal Guard",
-            "value": 3
+            "value": 4
         },{
             "name": "General",
-            "value": 4
+            "value": 5
         }
     ]
 
@@ -84,7 +84,7 @@ socket.on("game", (data) => {
             <div class="pieces-container" id="pieces-container">
                   ${pieces.map((piece) => {
                       return `
-                        <span class="piece" id="` + piece.name.toLocaleLowerCase().replace(/ /g, "-") +`">
+                        <span class="piece" id="piece-select-${piece.name.toLocaleLowerCase().replace(/ /g, "-")}" data-type="${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">
                             ${piece.name}
                         </span>`
                   })}
@@ -92,8 +92,8 @@ socket.on("game", (data) => {
         `
         Array.from(document.querySelectorAll(".piece")).forEach((piece) => {
             piece.addEventListener("click", (e) => {
-                let id = e.target.id
-                let piece = pieces.find(piece => piece.name.toLocaleLowerCase().replace(/ /g, "-") === id)
+                let type = e.target.dataset.type
+                let piece = pieces.find(piece => piece.name.toLocaleLowerCase().replace(/ /g, "-") === type)
                 
                 addPiece(piece, playerNumber)
             })
@@ -202,11 +202,45 @@ function addPiece (piece, playerNumber) {
     if (availablePoints >= 0) {
         let $capture = document.getElementById("capture-player-" + playerNumber)
 
-        $capture.innerHTML += `<p>${piece.name}</p>`
-    } 
+        // Limit of 1 General and 2 Royal Guards
+        if (piece.name === "General") {
+            document.getElementById("piece-select-general").remove()
+        }
+        if (piece.name === "Royal Guard" && $capture.innerHTML.indexOf("Royal Guard") > -1) {
+            document.getElementById("piece-select-royal-guard").remove()
+        }
+
+        $capture.innerHTML += `<p data-type="${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">${piece.name}</p>`
+    }
     
     if (availablePoints > 0) {
         $points.innerHTML = availablePoints
+
+        // Remove unavailable pieces
+        if (availablePoints < 5) {
+            if (document.getElementById("piece-select-general"))
+                document.getElementById("piece-select-general").remove()
+        } 
+        if (availablePoints < 4) {
+            if (document.getElementById("piece-select-royal-guard"))
+                document.getElementById("piece-select-royal-guard").remove()
+        } 
+        if (availablePoints < 3) {
+            if (document.getElementById("piece-select-bishop"))
+                document.getElementById("piece-select-bishop").remove()
+            if (document.getElementById("piece-select-knight"))
+                document.getElementById("piece-select-knight").remove()
+            if (document.getElementById("piece-select-tower"))
+                document.getElementById("piece-select-tower").remove()
+        } 
+        if (availablePoints < 2) {
+            if (document.getElementById("piece-select-archer"))
+                document.getElementById("piece-select-archer").remove()
+            if (document.getElementById("piece-select-lancer"))
+                document.getElementById("piece-select-lancer").remove()
+            if (document.getElementById("piece-select-lord"))
+                document.getElementById("piece-select-lord").remove()
+        }
     } else {
         document.getElementById("pieces-container").remove()
         $info.innerHTML = `<p>Place your selected pieces on the field ...</p><p><button id="start-game">Start</button></p>`

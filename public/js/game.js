@@ -17,16 +17,16 @@ socket.on("game", (data) => {
             "value": 1
         },{
             "name": "Slinger",
-            "value": 1
+            "value": 2
         },{
             "name": "Lancer",
             "value": 2
         },{
             "name": "Archer",
-            "value": 2
+            "value": 3
         },{
             "name": "Lord",
-            "value": 2
+            "value": 3
         },{
             "name": "Knight",
             "value": 3
@@ -35,7 +35,7 @@ socket.on("game", (data) => {
             "value": 3
         },{
             "name": "Tower",
-            "value": 3
+            "value": 4
         },{
             "name": "Royal Guard",
             "value": 4

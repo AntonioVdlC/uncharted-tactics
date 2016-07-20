@@ -16,11 +16,14 @@ socket.on("game", (data) => {
             "name": "Pawn",
             "value": 1
         },{
+            "name": "Slinger",
+            "value": 1
+        },{
             "name": "Lancer",
             "value": 2
         },{
-            "name": "Slinger",
-            "value": 1
+            "name": "Archer",
+            "value": 2
         },{
             "name": "Lord",
             "value": 2
@@ -30,9 +33,6 @@ socket.on("game", (data) => {
         },{
             "name": "Bishop",
             "value": 3
-        },{
-            "name": "Archer",
-            "value": 2
         },{
             "name": "Tower",
             "value": 3

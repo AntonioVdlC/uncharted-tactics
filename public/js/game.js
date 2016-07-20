@@ -95,9 +95,20 @@ socket.on("game", (data) => {
                 let type = e.target.dataset.type
                 let piece = pieces.find(piece => piece.name.toLocaleLowerCase().replace(/ /g, "-") === type)
                 
-                addPiece(piece, playerNumber)
+                addPiece(piece, field, playerNumber)
             })
         })
+    })
+
+    socket.on("field", (data) => {
+        console.log(data)
+        
+        field = data.field
+        captured = data.captured
+
+        $field.innerHTML = displayField(field)
+        $capture1.innerHTML = displayCaptured(captured[0])
+        $capture2.innerHTML = displayCaptured(captured[1])
     })
 
     // Start game
@@ -192,7 +203,7 @@ function calculateAvailblePoints (player, players) {
     }
 }
 
-function addPiece (piece, playerNumber) {
+function addPiece (piece, field, playerNumber) {
     let $points = document.getElementById("available-points")
     let $info = document.getElementById("info")
 
@@ -210,7 +221,7 @@ function addPiece (piece, playerNumber) {
             document.getElementById("piece-select-royal-guard").remove()
         }
 
-        $capture.innerHTML += `<p data-type="${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">${piece.name}</p>`
+        $capture.innerHTML += `<p data-name="${piece.name}">${piece.name}</p>`
     }
     
     if (availablePoints > 0) {
@@ -243,6 +254,69 @@ function addPiece (piece, playerNumber) {
         }
     } else {
         document.getElementById("pieces-container").remove()
-        $info.innerHTML = `<p>Place your selected pieces on the field ...</p><p><button id="start-game">Start</button></p>`
+        $info.innerHTML = `<p>Place your selected pieces on the field ...</p>`
+
+        Array.from(document.querySelectorAll("#capture-player-" + playerNumber + " p")).forEach((piece) => {
+            piece.addEventListener("click", function (e) {
+                let piece = e.target.dataset.name
+                this.remove()
+                prepareFieldForPlacing(piece, field, playerNumber)
+            })
+        })
+    }
+}
+
+function prepareFieldForPlacing (piece, field, playerNumber) {
+    let fieldLength = field.length
+    let fieldWidth = field[0].length
+
+    let $info = document.getElementById("info")
+
+    for (let i = 0; i < fieldLength; i++) {
+        for (let j = 0; j < fieldWidth; j++) {
+            let $tile = document.getElementById(i + "-" + j)
+            
+            if (
+                playerNumber === 1 && !(i === 0 || i === 1 || i === 2) || 
+                playerNumber === 2 && !(i === fieldLength - 1 || i === fieldLength - 2 || i === fieldLength - 3) ||
+                $tile.innerHTML || field[i][j].type === "river"
+            ) {
+                if ($tile.className.indexOf("forbidden") === -1)    
+                    $tile.className += " forbidden"
+            } else {
+                $tile.addEventListener("click", (e) => {
+                    $tile.innerHTML = piece
+                    field[i][j].piece = {
+                        type: piece,
+                        player: playerNumber
+                    }
+
+                    document.getElementById("field").innerHTML = displayField(field)
+
+                    if (!document.querySelectorAll("#capture-player-" + playerNumber + " p").length) {
+                        let pieces = []
+
+                        field.forEach((row, i) => {
+                            row.forEach((tile, j) => {
+                                if (tile.piece && tile.piece.type !== "King") {
+                                    pieces.push({
+                                        type: tile.piece.type,
+                                        i: i,
+                                        j: j
+                                    })
+                                }
+                            })
+                        })
+
+                        socket.emit("initial", {
+                            pieces: pieces
+                        })
+
+                        // Wait on rival placing 
+                        $info.innerHTML = "Waiting on your rival to place his/her pieces ..."
+                    }
+                })
+            }
+        }
     }
 }

@@ -12,6 +12,13 @@ const updateField = function (field, action) {
         }
     } else if (action.type === "capture") {
         console.log("TODO ...")
+    } else if (action.type === "initial") { 
+        action.pieces.forEach((piece) => {
+            newField[piece.i][piece.j].piece = {
+                type: piece.type,
+                player: action.player
+            }
+        })
     } else {
         throw new Error("Action type not recognized.")
     }

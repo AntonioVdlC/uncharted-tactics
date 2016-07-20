@@ -41,8 +41,8 @@ const socket = function (io) {
                         getRandomElementFrom
                     ),
                     sockets: [
-                        socket.id,
-                        room.id
+                        room.id,
+                        socket.id
                     ]
                 }
 
@@ -51,6 +51,7 @@ const socket = function (io) {
 
                 games[room.id] = game
                 games[room.id].kings = []
+                games[room.id].initialPositions = []
 
                 games[sockets[socket.id].room].sockets.forEach((socket) => {
                     sockets[socket].emit("game", {
@@ -73,7 +74,7 @@ const socket = function (io) {
                 field = updateField(field, {
                     type: "move", 
                     piece: "King",
-                    player: games[room].sockets.indexOf(socket.id) + 1,
+                    player: (games[room].sockets.indexOf(socket.id) + 1 === 1) ? 2 : 1,
                     start: null, 
                     end: position
                 })
@@ -81,6 +82,30 @@ const socket = function (io) {
                 if (kings.length === 2) {
                     games[room].sockets.forEach((socket) => {
                         sockets[socket].emit("king", {
+                            field: field,
+                            captured: field.captured
+                        })
+                    })
+                }
+            })
+
+            socket.on("initial", (data) => {
+                let room = sockets[socket.id].room
+                let field = games[room].field
+
+                let initialPositions = games[room].initialPositions
+
+                field = updateField(field, {
+                    type: "initial",
+                    pieces: data.pieces,
+                    player: games[room].sockets.indexOf(socket.id) + 1
+                })
+
+                initialPositions.push(socket.id)
+
+                if (initialPositions.length === 2) {
+                    games[room].sockets.forEach((socket) => {
+                        sockets[socket].emit("field", {
                             field: field,
                             captured: field.captured
                         })

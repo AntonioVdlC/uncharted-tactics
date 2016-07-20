@@ -10,6 +10,7 @@ socket.on("game", (data) => {
     let fieldWidth = field[0].length
 
     let playerNumber = players.findIndex((p) => p.id === player.id) + 1
+    let turn = 0
 
     let pieces = [
         {
@@ -60,9 +61,9 @@ socket.on("game", (data) => {
     // Position rival's King
     $info.innerHTML = "Place the rival's King in the last row!"
     if (player.id === players[0].id) {
-        $capture1.innerHTML = `<span class="place-king" id="place-king">K</span>`
+        $capture1.innerHTML = `<span class="place-king" id="place-king">King</span>`
     } else {
-        $capture2.innerHTML = `<span class="place-king" id="place-king">K</span>`
+        $capture2.innerHTML = `<span class="place-king" id="place-king">King</span>`
     }
 
     document.getElementById("place-king").addEventListener("click", (e) => {
@@ -100,19 +101,35 @@ socket.on("game", (data) => {
         })
     })
 
-    socket.on("field", (data) => {
+    // Start game
+    socket.on("turn", (data) => {
         console.log(data)
         
         field = data.field
         captured = data.captured
+        turn = data.turn
 
         $field.innerHTML = displayField(field)
         $capture1.innerHTML = displayCaptured(captured[0])
         $capture2.innerHTML = displayCaptured(captured[1])
+
+        // Turn
+        if (turn % 2 === 0) {
+            // Player 2
+            if (player.id === players[0].id) {
+                $info.innerHTML = `Waiting for your rival to play ...`
+            } else {
+                $info.innerHTML = `Your turn!`
+            }
+        } else {
+            // Player 1
+            if (player.id === players[0].id) {
+                $info.innerHTML = `Your turn!`
+            } else {
+                $info.innerHTML = `Waiting for your rival to play ...`
+            }
+        }
     })
-
-    // Start game
-
 })
 
 function displayPlayers (players) {
@@ -132,7 +149,7 @@ function displayField (field) {
     for (let i = 0; i < fieldLength; i++) {
         fieldHTML += `<tr>`
         for (let j = 0; j < fieldWidth; j++) {
-            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type} ${(field[i][j].piece) ? "player-" + field[i][j].piece.player : ""}">${(field[i][j].piece) ? field[i][j].piece.type : ""}</td>`
+            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${(field[i][j].piece) ? "<span class='piece player-" + field[i][j].piece.player + " " + field[i][j].piece.type.toLocaleLowerCase().replace(/ /g, "-") + "'>" + field[i][j].piece.type + "</span>" : ""}</td>`
         }
         fieldHTML += `</tr>`
     }
@@ -173,7 +190,7 @@ function prepareFieldForKingPlacing (field, player, players) {
             } else {
                 $tile.addEventListener("click", (e) => {
                     // Update the DOM
-                    $tile.innerHTML = "K"
+                    $tile.innerHTML = "King"
                     $capture1.innerHTML = ""
                     $capture2.innerHTML = ""
 

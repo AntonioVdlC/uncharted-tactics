@@ -28,6 +28,9 @@ const socket = function (io) {
                 socket.leave(socket.id)
                 socket.join(room.id)
 
+                sockets[socket.id].room = room.id
+                sockets[room.id].room = room.id
+
                 let game = {
                     room: room.id,
                     players: getPlayers(
@@ -43,15 +46,13 @@ const socket = function (io) {
                     sockets: [
                         room.id,
                         socket.id
-                    ]
+                    ],
+                    kings: [],
+                    initialPositions: [],
+                    turn: 0
                 }
 
-                sockets[socket.id].room = room.id
-                sockets[room.id].room = room.id
-
                 games[room.id] = game
-                games[room.id].kings = []
-                games[room.id].initialPositions = []
 
                 games[sockets[socket.id].room].sockets.forEach((socket) => {
                     sockets[socket].emit("game", {
@@ -105,12 +106,38 @@ const socket = function (io) {
 
                 if (initialPositions.length === 2) {
                     games[room].sockets.forEach((socket) => {
-                        sockets[socket].emit("field", {
+                        sockets[socket].emit("turn", {
+                            turn: 1,
                             field: field,
                             captured: field.captured
                         })
                     })
                 }
+            })
+
+            socket.on("turn", (data) => {
+                let type = data.type
+                let piece = data.piece 
+                let start = data.start
+                let end = data.end
+
+                let turn = ++ games[room].turn
+
+                field = updateField(field, {
+                    type: type, 
+                    piece: piece,
+                    player: games[room].sockets.indexOf(socket.id) + 1,
+                    start: start, 
+                    end: end
+                })
+
+                games[room].sockets.forEach((socket) => {
+                    sockets[socket].emit("turn", {
+                        turn: turn,
+                        field: field,
+                        captured: field.captured
+                    })
+                })
             })
 
             socket.on("disconnect", () => {

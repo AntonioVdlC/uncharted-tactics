@@ -252,22 +252,24 @@ function addPiece (piece, field, playerNumber) {
         if (availablePoints < 4) {
             if (document.getElementById("piece-select-royal-guard"))
                 document.getElementById("piece-select-royal-guard").remove()
+            if (document.getElementById("piece-select-tower"))
+                document.getElementById("piece-select-tower").remove()
         } 
         if (availablePoints < 3) {
+            if (document.getElementById("piece-select-archer"))
+                document.getElementById("piece-select-archer").remove()
             if (document.getElementById("piece-select-bishop"))
                 document.getElementById("piece-select-bishop").remove()
             if (document.getElementById("piece-select-knight"))
                 document.getElementById("piece-select-knight").remove()
-            if (document.getElementById("piece-select-tower"))
-                document.getElementById("piece-select-tower").remove()
-        } 
-        if (availablePoints < 2) {
-            if (document.getElementById("piece-select-archer"))
-                document.getElementById("piece-select-archer").remove()
-            if (document.getElementById("piece-select-lancer"))
-                document.getElementById("piece-select-lancer").remove()
             if (document.getElementById("piece-select-lord"))
                 document.getElementById("piece-select-lord").remove()
+        } 
+        if (availablePoints < 2) {
+            if (document.getElementById("piece-select-lancer"))
+                document.getElementById("piece-select-lancer").remove()
+            if (document.getElementById("piece-select-slinger"))
+                document.getElementById("piece-select-slinger").remove()
         }
     } else {
         document.getElementById("pieces-container").remove()

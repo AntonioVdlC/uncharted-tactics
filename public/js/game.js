@@ -188,8 +188,13 @@ function prepareFieldForKingPlacing (field, playerNumber) {
                 $tile.className += " forbidden"
             } else {
                 $tile.addEventListener("click", (e) => {
-                    // Update the DOM
-                    $tile.innerHTML = `<span class="piece player-${(playerNumber === 1) ? 2 : 1} king">King</span>`
+                    // Update the DOM`
+                    field[i][j].piece = {
+                        type: "King",
+                        player: (playerNumber === 1) ? 2 : 1
+                    }
+
+                    document.getElementById("field").innerHTML = displayField(field)
 
                     // Emit socket message
                     socket.emit("king", {
@@ -301,7 +306,6 @@ function prepareFieldForPlacing (piece, field, playerNumber) {
                     $tile.className += " forbidden"
             } else {
                 $tile.addEventListener("click", (e) => {
-                    $tile.innerHTML = piece
                     field[i][j].piece = {
                         type: piece,
                         player: playerNumber

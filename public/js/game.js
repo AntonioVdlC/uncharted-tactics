@@ -61,13 +61,14 @@ socket.on("game", (data) => {
     // Position rival's King
     $info.innerHTML = "Place the rival's King in the last row!"
     if (player.id === players[0].id) {
-        $capture1.innerHTML = `<span class="place-king" id="place-king">King</span>`
+        $capture1.innerHTML = `<span class="piece player-2 king" id="place-king">King</span>`
     } else {
-        $capture2.innerHTML = `<span class="place-king" id="place-king">King</span>`
+        $capture2.innerHTML = `<span class="piece player-1 king" id="place-king">King</span>`
     }
 
-    document.getElementById("place-king").addEventListener("click", (e) => {
-        prepareFieldForKingPlacing(field, player, players)
+    document.getElementById("place-king").addEventListener("click", function (e) {
+        this.remove()
+        prepareFieldForKingPlacing(field, playerNumber)
     })
 
     socket.on("king", (data) => {
@@ -85,7 +86,7 @@ socket.on("game", (data) => {
             <div class="pieces-container" id="pieces-container">
                   ${pieces.map((piece) => {
                       return `
-                        <span class="piece" id="piece-select-${piece.name.toLocaleLowerCase().replace(/ /g, "-")}" data-type="${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">
+                        <span class="piece player-${playerNumber} ${piece.name.toLocaleLowerCase().replace(/ /g, "-")}" id="piece-select-${piece.name.toLocaleLowerCase().replace(/ /g, "-")}" data-name="${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">
                             ${piece.name}
                         </span>`
                   })}
@@ -93,7 +94,7 @@ socket.on("game", (data) => {
         `
         Array.from(document.querySelectorAll(".piece")).forEach((piece) => {
             piece.addEventListener("click", (e) => {
-                let type = e.target.dataset.type
+                let type = e.target.dataset.name
                 let piece = pieces.find(piece => piece.name.toLocaleLowerCase().replace(/ /g, "-") === type)
                 
                 addPiece(piece, field, playerNumber)
@@ -136,7 +137,7 @@ function displayPlayers (players) {
     let player1 = players[0]
     let player2 = players[1]
 
-    return `${player1.name} vs ${player2.name}`
+    return `<span class="player-1">${player1.name}</span> vs <span class="player-2">${player2.name}</span>`
 }
 
 function displayField (field) {
@@ -170,29 +171,25 @@ function displayCaptured (captured) {
     return capturedHTML
 }
 
-function prepareFieldForKingPlacing (field, player, players) {
+function prepareFieldForKingPlacing (field, playerNumber) {
     let fieldLength = field.length
     let fieldWidth = field[0].length
 
     let $info = document.getElementById("info")
-    let $capture1 = document.getElementById("capture-player-1")
-    let $capture2 = document.getElementById("capture-player-2")
 
     for (let i = 0; i < fieldLength; i++) {
         for (let j = 0; j < fieldWidth; j++) {
             let $tile = document.getElementById(i + "-" + j)
             
             if (
-                player.id === players[0].id && (i !== fieldLength - 1 || j === 0 || j === fieldWidth - 1) ||
-                player.id === players[1].id && (i !== 0 || j === 0 || j === fieldWidth - 1) 
+                playerNumber === 1 && (i !== fieldLength - 1 || j === 0 || j === fieldWidth - 1) ||
+                playerNumber === 2 && (i !== 0 || j === 0 || j === fieldWidth - 1) 
             ) {
                 $tile.className += " forbidden"
             } else {
                 $tile.addEventListener("click", (e) => {
                     // Update the DOM
-                    $tile.innerHTML = "King"
-                    $capture1.innerHTML = ""
-                    $capture2.innerHTML = ""
+                    $tile.innerHTML = `<span class="piece player-${(playerNumber === 1) ? 2 : 1} king">King</span>`
 
                     // Emit socket message
                     socket.emit("king", {
@@ -238,7 +235,7 @@ function addPiece (piece, field, playerNumber) {
             document.getElementById("piece-select-royal-guard").remove()
         }
 
-        $capture.innerHTML += `<p data-name="${piece.name}">${piece.name}</p>`
+        $capture.innerHTML += `<p><span data-name="${piece.name}" class="piece player-${playerNumber} ${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">${piece.name}</span></p>`
     }
     
     if (availablePoints > 0) {

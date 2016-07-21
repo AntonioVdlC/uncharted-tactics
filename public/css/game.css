@@ -29,10 +29,12 @@
 }
 
 .player-1 {
-    color: white;
+    background: white;
+    color: black;
 }
 .player-2 {
-    color: black;
+    background: black;
+    color: white;
 }
 
 .capture {

@@ -86,7 +86,7 @@ socket.on("game", (data) => {
             <div class="pieces-container" id="pieces-container">
                   ${pieces.map((piece) => {
                       return `
-                        <span class="piece player-${playerNumber} ${piece.name.toLocaleLowerCase().replace(/ /g, "-")}" id="piece-select-${piece.name.toLocaleLowerCase().replace(/ /g, "-")}" data-name="${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">
+                        <span class="piece player-${playerNumber} ${dashify(piece.name)}" id="piece-select-${dashify(piece.name)}" data-name="${dashify(piece.name)}">
                             ${piece.name}
                         </span>`
                   })}
@@ -94,8 +94,8 @@ socket.on("game", (data) => {
         `
         Array.from(document.querySelectorAll(".piece")).forEach((piece) => {
             piece.addEventListener("click", (e) => {
-                let type = e.target.dataset.name
-                let piece = pieces.find(piece => piece.name.toLocaleLowerCase().replace(/ /g, "-") === type)
+                let name = e.target.dataset.name
+                let piece = pieces.find(piece => dashify(piece.name) === name)
                 
                 addPiece(piece, field, playerNumber)
             })
@@ -235,7 +235,7 @@ function addPiece (piece, field, playerNumber) {
             document.getElementById("piece-select-royal-guard").remove()
         }
 
-        $capture.innerHTML += `<p><span data-name="${piece.name}" class="piece player-${playerNumber} ${piece.name.toLocaleLowerCase().replace(/ /g, "-")}">${piece.name}</span></p>`
+        $capture.innerHTML += `<p><span data-name="${piece.name}" class="piece player-${playerNumber} ${dashify(piece.name)}">${piece.name}</span></p>`
     }
     
     if (availablePoints > 0) {
@@ -335,4 +335,10 @@ function prepareFieldForPlacing (piece, field, playerNumber) {
             }
         }
     }
+}
+
+function dashify (str) {
+    return String(str)
+        .toLowerCase()
+        .replace(/ /g, "-")
 }

@@ -309,11 +309,49 @@ socket.on("game", (data) => {
                 $info.innerHTML = `Waiting for your rival to play ...`
             } else {
                 $info.innerHTML = `Your turn!`
+                Array.from(document.querySelectorAll(".piece.player-2")).forEach(($piece) => {
+                    $piece.addEventListener("click", (e) => {
+                        console.log(e)
+                        let piece = pieces.find(piece => piece.name === e.target.dataset.name)
+                        let position = {
+                            i: parseInt(e.target.parentNode.id.split("-")[0], 10),
+                            j: parseInt(e.target.parentNode.id.split("-")[1], 10)
+                        }
+
+                        document.getElementById("field").innerHTML = displayField(field)
+                        
+                        displayPieceActions(field, piece, position, playerNumber)
+
+                        // Cancel action on click on selected piece 
+                        document.getElementById(position.i + "-" + position.j).addEventListener("click", (e) => {
+                            document.getElementById("field").innerHTML = displayField(field)
+                        })
+                    })
+                })
             }
         } else {
             // Player 1
             if (player.id === players[0].id) {
                 $info.innerHTML = `Your turn!`
+                Array.from(document.querySelectorAll(".piece.player-1")).forEach(($piece) => {
+                    $piece.addEventListener("click", (e) => {
+                        console.log(e)
+                        let piece = pieces.find(piece => piece.name === e.target.dataset.name)
+                        let position = {
+                            i: parseInt(e.target.parentNode.id.split("-")[0], 10),
+                            j: parseInt(e.target.parentNode.id.split("-")[1], 10)
+                        }
+
+                        document.getElementById("field").innerHTML = displayField(field)
+                        
+                        displayPieceActions(field, piece, position, playerNumber)
+
+                        // Cancel action on click on selected piece 
+                        document.getElementById(position.i + "-" + position.j).addEventListener("click", (e) => {
+                            document.getElementById("field").innerHTML = displayField(field)
+                        })
+                    })
+                })
             } else {
                 $info.innerHTML = `Waiting for your rival to play ...`
             }
@@ -338,7 +376,7 @@ function displayField (field) {
     for (let i = 0; i < fieldLength; i++) {
         fieldHTML += `<tr>`
         for (let j = 0; j < fieldWidth; j++) {
-            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${(field[i][j].piece) ? "<span class='piece player-" + field[i][j].piece.player + " " + field[i][j].piece.type.toLocaleLowerCase().replace(/ /g, "-") + "'>" + field[i][j].piece.type + "</span>" : ""}</td>`
+            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${(field[i][j].piece) ? "<span data-name='" + field[i][j].piece.type + "' class='piece player-" + field[i][j].piece.player + " " + field[i][j].piece.type.toLocaleLowerCase().replace(/ /g, "-") + "'>" + field[i][j].piece.type + "</span>" : ""}</td>`
         }
         fieldHTML += `</tr>`
     }
@@ -533,4 +571,55 @@ function dashify (str) {
     return String(str)
         .toLowerCase()
         .replace(/ /g, "-")
+}
+
+function displayPieceActions (field, piece, position, playerNumber) {
+    // Highlight the clicked piece
+    document.getElementById(position.i + "-" + position.j).className += " selected"
+
+    // Highlight possible movements actions
+    let tileType = field[position.i][position.j].type
+    let action = piece.action[tileType]
+
+    let actionField = {}
+    if (action.length === 3) {
+        actionField.i = {
+            start: Math.max(0, position.i - 1),
+            end: Math.min(field.length, position.i + 1)
+        }
+        actionField.j = {
+            start : Math.max(0, position.j - 1),
+            end: Math.min(field[0].length, position.j + 1)
+        }
+    } else /* action.length === 5 */ {
+        actionField.i = {
+            start: Math.max(0, position.i - 2),
+            end: Math.min(field.length, position.i + 2)
+        }
+        actionField.j = {
+            start : Math.max(0, position.j - 2),
+            end: Math.min(field[0].length, position.j + 2)
+        }
+    }
+
+    let matriceCenter = Math.floor(action.length / 2)
+    if (playerNumber === 1) {
+        for (let i = actionField.i.end; i >= actionField.i.start; i --) {
+            for (let j = actionField.j.end; j >= actionField.j.start; j --) {
+                console.log(i + "-" + j)
+                console.log(field[i][j])
+                console.log(action[i + (matriceCenter - position.i)][j + (matriceCenter - position.j)].move)
+                console.log(action[i + (matriceCenter - position.i)][j + (matriceCenter - position.j)].capture)
+            }
+        }
+    } else /* playerNumber === 2 */ {
+        for (let i = actionField.i.start; i <= actionField.i.end; i ++) {
+            for (let j = actionField.j.start; j <= actionField.j.end; j ++) {
+                console.log(i + "-" + j)
+                console.log(field[i][j])
+                console.log(action[i + (matriceCenter - position.i)][j + (matriceCenter - position.j)].move)
+                console.log(action[i + (matriceCenter - position.i)][j + (matriceCenter - position.j)].capture)
+            }
+        }
+    }
 }

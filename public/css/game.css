@@ -27,6 +27,9 @@
 .forbidden {
     opacity: 0.5;
 }
+.selected {
+    border: 5px solid black;
+}
 
 .player-1 {
     background: white;

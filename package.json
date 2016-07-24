@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run build:js",
     "build:js": "webpack",
-    "dev": "nodemon server.js",
+    "dev": "npm run watch & nodemon server.js",
     "start": "forever server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm run watch:js",

@@ -47,7 +47,7 @@ socket.on("game", (data) => {
     document.getElementById("place-king").addEventListener("click", function (e) {
         let piece = pieces.find(piece => piece.name === "King")
         this.remove()
-        prepareFieldForPlacing(piece, field, playerNumber)
+        prepareFieldForPlacing(piece, field, playerNumber, socket)
     })
 
     socket.on("king", (data) => {
@@ -76,7 +76,7 @@ socket.on("game", (data) => {
                 let name = e.target.dataset.name
                 let piece = pieces.find(piece => dashify(piece.name) === name)
                 
-                addPiece(piece, field, playerNumber)
+                addPiece(piece, field, playerNumber, socket)
             })
         })
     })

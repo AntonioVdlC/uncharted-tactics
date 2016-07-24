@@ -1,4 +1,6 @@
-const prepareFieldForPlacing = function (piece, field, playerNumber) {
+const renderField = require("./renderField")
+
+const prepareFieldForPlacing = function (piece, field, playerNumber, socket) {
     let fieldLength = field.length
     let fieldWidth = field[0].length
 

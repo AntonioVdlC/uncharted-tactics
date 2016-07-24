@@ -1,7 +1,7 @@
 const dashify = require("../../../utils/dashify")
 const prepareFieldForPlacing = require("./prepareFieldForPlacing")
 
-const addPiece = function (piece, field, playerNumber) {
+const addPiece = function (piece, field, playerNumber, socket) {
     let $points = document.getElementById("available-points")
     let $info = document.getElementById("info")
 
@@ -60,7 +60,7 @@ const addPiece = function (piece, field, playerNumber) {
             piece.addEventListener("click", function (e) {
                 let piece = e.target.dataset.name
                 this.remove()
-                prepareFieldForPlacing(piece, field, playerNumber)
+                prepareFieldForPlacing(piece, field, playerNumber, socket)
             })
         })
     }

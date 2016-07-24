@@ -4,7 +4,7 @@ const app = express()
 const server = app.listen(require("./config/port"))
 
 const io = require("socket.io")(server)
-const socket = require("./socket/index")
+const socket = require("./socket/main")
 
 const session = require("express-session")
 const sessionMiddleware = session(require("./config/session"))

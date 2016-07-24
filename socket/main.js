@@ -1,13 +1,15 @@
 const config = {
-    field: require("../config/field")
+    field: require("../config/field"),
+    pieces: require("../config/pieces")
 }
 
-const getPlayers = require("../utils/getPlayers")
 const getRandomElementFrom = require("../utils/getRandomElementFromArray")
-const getRooms = require("../utils/getRooms")
-const generateField = require("../utils/generateField")
-const isAvailableRoom = require("../utils/isAvailableRoom")
-const updateField = require("../utils/updateField")
+
+const getPlayers = require("./getPlayers")
+const getRooms = require("./getRooms")
+const generateField = require("./generateField")
+const isAvailableRoom = require("./isAvailableRoom")
+const updateField = require("./updateField")
 
 const games = {}
 const sockets = {}

@@ -3,7 +3,7 @@
 
     document
         .getElementById("new-game-button")
-        .addEventListener("click", (e) => {
+        .addEventListener("click", function (e) {
             window.location = "/game"
         })
 }())

@@ -24,11 +24,18 @@
 .river {
     background-color: darkblue;
 }
+
 .forbidden {
     opacity: 0.5;
 }
 .selected {
     border: 5px solid black;
+}
+.move {
+    border: 5px solid greenyellow;
+}
+.capture {
+    border: 5px solid red;
 }
 
 .player-1 {
@@ -40,6 +47,6 @@
     color: white;
 }
 
-.capture {
+.captured-pieces {
     min-width: 10%
 }

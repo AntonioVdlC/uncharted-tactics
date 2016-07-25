@@ -32,6 +32,7 @@
     "express-session": "^1.14.0",
     "forever": "^0.15.2",
     "random-item": "^1.0.0",
+    "rotate-matrix": "0.0.1",
     "socket.io": "^1.4.8"
   },
   "devDependencies": {

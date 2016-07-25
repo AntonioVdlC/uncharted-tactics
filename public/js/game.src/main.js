@@ -109,14 +109,16 @@ socket.on("game", (data) => {
                             j: parseInt(e.target.parentNode.id.split("-")[1], 10)
                         }
 
-                        document.getElementById("field").innerHTML = renderField(field)
+                        ;[
+                            ...document.querySelectorAll(".selected"), ...document.querySelectorAll(".move"),
+                            ...document.querySelectorAll(".capture")
+                        ].forEach(($tile) => {
+                            $tile.classList.remove("selected")
+                            $tile.classList.remove("move")
+                            $tile.classList.remove("capture")
+                        })
                         
                         displayPieceActions(field, piece, position, playerNumber)
-
-                        // Cancel action on click on selected piece 
-                        document.getElementById(position.i + "-" + position.j).addEventListener("click", (e) => {
-                            document.getElementById("field").innerHTML = renderField(field)
-                        })
                     })
                 })
             }
@@ -133,14 +135,16 @@ socket.on("game", (data) => {
                             j: parseInt(e.target.parentNode.id.split("-")[1], 10)
                         }
 
-                        document.getElementById("field").innerHTML = renderField(field)
+                        ;[
+                            ...document.querySelectorAll(".selected"), ...document.querySelectorAll(".move"),
+                            ...document.querySelectorAll(".capture")
+                        ].forEach(($tile) => {
+                            $tile.classList.remove("selected")
+                            $tile.classList.remove("move")
+                            $tile.classList.remove("capture")
+                        })
                         
                         displayPieceActions(field, piece, position, playerNumber)
-
-                        // Cancel action on click on selected piece 
-                        document.getElementById(position.i + "-" + position.j).addEventListener("click", (e) => {
-                            document.getElementById("field").innerHTML = renderField(field)
-                        })
                     })
                 })
             } else {

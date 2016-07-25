@@ -3,7 +3,7 @@ const config = {
     pieces: require("../config/pieces")
 }
 
-const getRandomElementFrom = require("../utils/getRandomElementFromArray")
+const getRandomItem = require("random-item")
 
 const getPlayers = require("./getPlayers")
 const getRooms = require("./getRooms")
@@ -43,7 +43,7 @@ const socket = function (io) {
                         config.field.length,
                         config.field.width,
                         config.field.tileTypes,
-                        getRandomElementFrom
+                        getRandomItem
                     ),
                     sockets: [
                         room.id,

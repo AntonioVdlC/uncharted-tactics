@@ -1,6 +1,6 @@
 const pieces = require("../../../config/pieces")
 
-const dashify = require("../../../utils/dashify")
+const dashify = require("dashify")
 
 const addPiece = require("./addPiece")
 const calculateStartPoints = require("./calculateStartPoints")

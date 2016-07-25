@@ -1,4 +1,5 @@
-const dashify = require("../../../utils/dashify")
+const dashify = require("dashify")
+
 const prepareFieldForPlacing = require("./prepareFieldForPlacing")
 
 const addPiece = function (piece, field, playerNumber, socket) {

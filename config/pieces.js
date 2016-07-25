@@ -4,19 +4,55 @@ const pieces = [
         "value": 1,
         "action": {
             "plain": [
-                [{move: 0, capture: 1}, {move: 1, capture: 0}, {move: 0, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: true}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 0, capture: 1}, {move: 1, capture: 0}, {move: 0, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: true}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -24,25 +60,95 @@ const pieces = [
         "value": 2,
         "action": {
             "plain": [
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 1}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 2}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -50,19 +156,55 @@ const pieces = [
         "value": 2,
         "action": {
             "plain": [
-                [{move: 0, capture: 0}, {move: 1, capture: 2}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 0, capture: 0}, {move: 1, capture: 2}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -70,25 +212,95 @@ const pieces = [
         "value": 3,
         "action": {
             "plain": [
-                [{move: 0, capture: 0}, {move: 0, capture: 1}, {move: 0, capture: 1}, {move: 0, capture: 1}, {move: 0, capture: 0}],
-                [{move: 0, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 1}],
-                [{move: 0, capture: 1}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: true}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 0, capture: 1}, {move: 0, capture: 2}, {move: 0, capture: 2}, {move: 0, capture: 2}, {move: 0, capture: 1}],
-                [{move: 0, capture: 2}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 2}],
-                [{move: 0, capture: 2}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 2}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: true}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: true}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -96,19 +308,55 @@ const pieces = [
         "value": 3,
         "action": {
             "plain": [
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ]
             ],
             "hill": [
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -116,25 +364,95 @@ const pieces = [
         "value": 3,
         "action": {
             "plain": [
-                [{move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 1}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 1}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -142,19 +460,55 @@ const pieces = [
         "value": 3,
         "action": {
             "plain": [
-                [{move: 2, capture: 2}, {move: 0, capture: 0}, {move: 2, capture: 2}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 2, capture: 2}, {move: 0, capture: 0}, {move: 2, capture: 2}]
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ]
             ],
             "hill": [
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}]
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -162,19 +516,55 @@ const pieces = [
         "value": 4,
         "action": {
             "plain": [
-                [{move: 0, capture: 0}, {move: 10, capture: 10}, {move: 0, capture: 0}],
-                [{move: 10, capture: 10}, {move: 0, capture: 0}, {move: 10, capture: 10}],
-                [{move: 0, capture: 0}, {move: 10, capture: 10}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -182,19 +572,55 @@ const pieces = [
         "value": 4,
         "action": {
             "plain": [
-                [{move: 2, capture: 2}, {move: 2, capture: 2}, {move: 2, capture: 2}],
-                [{move: 2, capture: 2}, {move: 0, capture: 0}, {move: 2, capture: 2}],
-                [{move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ]
             ],
             "hill": [
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 0, capture: 0}, {move: 1, capture: 1}, {move: 0, capture: 0}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -202,19 +628,55 @@ const pieces = [
         "value": 5,
         "action": {
             "plain": [
-                [{move: 10, capture: 10}, {move: 10, capture: 10}, {move: 10, capture: 10}],
-                [{move: 10, capture: 10}, {move: 0, capture: 0}, {move: 10, capture: 10}],
-                [{move: 10, capture: 10}, {move: 10, capture: 10}, {move: 10, capture: 10}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ]
             ],
             "hill": [
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     },{
@@ -222,19 +684,55 @@ const pieces = [
         "value": 0,
         "action": {
             "plain": [
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ]
             ],
             "hill": [
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 0, capture: 0}, {move: 1, capture: 1}],
-                [{move: 1, capture: 1}, {move: 1, capture: 1}, {move: 1, capture: 1}]
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: false, capture: false}, 
+                    {move: true, capture: true}
+                ],
+                [
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}, 
+                    {move: true, capture: true}
+                ]
             ],
             "river": [
-                [{move: 0, capture: 0}, {move: 1, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}],
-                [{move: 0, capture: 0}, {move: 0, capture: 0}, {move: 0, capture: 0}]
+                [
+                    {move: false, capture: false}, 
+                    {move: true, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ],
+                [
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}, 
+                    {move: false, capture: false}
+                ]
             ]
         }
     }

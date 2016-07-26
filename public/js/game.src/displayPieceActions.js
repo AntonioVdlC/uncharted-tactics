@@ -14,11 +14,11 @@ const displayPieceActions = function (field, piece, position, playerNumber) {
     let actionField = {
         i: {
             start: Math.max(0, position.i - matriceCenter),
-            end: Math.min(field.length, position.i + matriceCenter)
+            end: Math.min(field.length - 1, position.i + matriceCenter)
         },
         j: {
             start : Math.max(0, position.j - matriceCenter),
-            end: Math.min(field[0].length, position.j + matriceCenter)
+            end: Math.min(field[0].length - 1, position.j + matriceCenter)
         }
     }
     let margin = {
@@ -28,28 +28,20 @@ const displayPieceActions = function (field, piece, position, playerNumber) {
 
     for (let i = actionField.i.start; i <= actionField.i.end; i ++) {
         for (let j = actionField.j.start; j <= actionField.j.end; j ++) {
-            console.log(i + "-" + j + " => " + (i + margin.i) + "-" + (j + margin.j))
-            console.log(field[i][j])
             
+            let $tile = document.getElementById(i + "-" + j)
+
             let move = action[i + margin.i][j + margin.j].move
             let capture = action[i + margin.i][j + margin.j].capture
-
-            let $tile = document.getElementById(i + "-" + j)
 
             // Move
             if (move && !field[i][j].piece) {
                 $tile.className += " move"
-                $tile.addEventListener("click", (e) => {
-                    console.log(e)
-                })
             }
 
             // Capture
             if (capture && field[i][j].piece && field[i][j].piece.player !== playerNumber) {
                 $tile.className += " capture"
-                $tile.addEventListener("click", (e) => {
-                    console.log(e)
-                })
             }
         }
     }

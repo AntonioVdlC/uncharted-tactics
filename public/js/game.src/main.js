@@ -94,62 +94,34 @@ socket.on("game", (data) => {
         $capture2.innerHTML = renderCaptured(captured[1])
 
         // Turn
-        if (turn % 2 === 0) {
-            // Player 2
-            if (player.id === players[0].id) {
-                $info.innerHTML = `Waiting for your rival to play ...`
-            } else {
-                $info.innerHTML = `Your turn!`
-                Array.from(document.querySelectorAll(".piece.player-2")).forEach(($piece) => {
-                    $piece.addEventListener("click", (e) => {
-                        console.log(e)
-                        let piece = pieces.find(piece => piece.name === e.target.dataset.name)
-                        let position = {
-                            i: parseInt(e.target.parentNode.id.split("-")[0], 10),
-                            j: parseInt(e.target.parentNode.id.split("-")[1], 10)
-                        }
-
-                        ;[
-                            ...document.querySelectorAll(".selected"), ...document.querySelectorAll(".move"),
-                            ...document.querySelectorAll(".capture")
-                        ].forEach(($tile) => {
-                            $tile.classList.remove("selected")
-                            $tile.classList.remove("move")
-                            $tile.classList.remove("capture")
-                        })
-                        
-                        displayPieceActions(field, piece, position, playerNumber)
-                    })
-                })
-            }
+        if (
+            turn % 2 === 0 && playerNumber === 1 || 
+            turn % 2 === 1 && playerNumber === 2
+        ) {
+            $info.innerHTML = `Waiting for your rival to play ...`
         } else {
-            // Player 1
-            if (player.id === players[0].id) {
-                $info.innerHTML = `Your turn!`
-                Array.from(document.querySelectorAll(".piece.player-1")).forEach(($piece) => {
-                    $piece.addEventListener("click", (e) => {
-                        console.log(e)
-                        let piece = pieces.find(piece => piece.name === e.target.dataset.name)
-                        let position = {
-                            i: parseInt(e.target.parentNode.id.split("-")[0], 10),
-                            j: parseInt(e.target.parentNode.id.split("-")[1], 10)
-                        }
+            $info.innerHTML = `Your turn!`
+            Array.from(document.querySelectorAll(".piece.player-" + playerNumber)).forEach(($piece) => {
+                $piece.addEventListener("click", (e) => {
+                    console.log(e)
+                    let piece = pieces.find(piece => piece.name === e.target.dataset.name)
+                    let position = {
+                        i: parseInt(e.target.parentNode.id.split("-")[0], 10),
+                        j: parseInt(e.target.parentNode.id.split("-")[1], 10)
+                    }
 
-                        ;[
-                            ...document.querySelectorAll(".selected"), ...document.querySelectorAll(".move"),
-                            ...document.querySelectorAll(".capture")
-                        ].forEach(($tile) => {
-                            $tile.classList.remove("selected")
-                            $tile.classList.remove("move")
-                            $tile.classList.remove("capture")
-                        })
-                        
-                        displayPieceActions(field, piece, position, playerNumber)
+                    ;[
+                        ...document.querySelectorAll(".selected"), ...document.querySelectorAll(".move"),
+                        ...document.querySelectorAll(".capture")
+                    ].forEach(($tile) => {
+                        $tile.classList.remove("selected")
+                        $tile.classList.remove("move")
+                        $tile.classList.remove("capture")
                     })
+                    
+                    displayPieceActions(field, piece, position, playerNumber)
                 })
-            } else {
-                $info.innerHTML = `Waiting for your rival to play ...`
-            }
+            })
         }
     })
 })

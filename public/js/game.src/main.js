@@ -5,6 +5,7 @@ const dashify = require("dashify")
 const addPiece = require("./addPiece")
 const calculateStartPoints = require("./calculateStartPoints")
 const displayPieceActions = require("./displayPieceActions")
+const handlePieceActions = require("./handlePieceActions")
 const prepareFieldForPlacing = require("./prepareFieldForPlacing")
 const renderCaptured = require("./renderCaptured")
 const renderField = require("./renderField")
@@ -93,6 +94,9 @@ socket.on("game", (data) => {
         $capture1.innerHTML = renderCaptured(captured[0])
         $capture2.innerHTML = renderCaptured(captured[1])
 
+        // Attach move and capture event handlers
+        document.querySelector("table.field").addEventListener("click", (e) => handlePieceActions(e, field, socket))
+
         // Turn
         if (
             turn % 2 === 0 && playerNumber === 1 || 
@@ -103,13 +107,14 @@ socket.on("game", (data) => {
             $info.innerHTML = `Your turn!`
             Array.from(document.querySelectorAll(".piece.player-" + playerNumber)).forEach(($piece) => {
                 $piece.addEventListener("click", (e) => {
-                    console.log(e)
+                    // Retrieve info
                     let piece = pieces.find(piece => piece.name === e.target.dataset.name)
                     let position = {
                         i: parseInt(e.target.parentNode.id.split("-")[0], 10),
                         j: parseInt(e.target.parentNode.id.split("-")[1], 10)
                     }
 
+                    // Clear field
                     ;[
                         ...document.querySelectorAll(".selected"), ...document.querySelectorAll(".move"),
                         ...document.querySelectorAll(".capture")
@@ -119,6 +124,7 @@ socket.on("game", (data) => {
                         $tile.classList.remove("capture")
                     })
                     
+                    // Display piiece actions
                     displayPieceActions(field, piece, position, playerNumber)
                 })
             })

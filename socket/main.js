@@ -107,9 +107,11 @@ const socket = function (io) {
                 initialPositions.push(socket.id)
 
                 if (initialPositions.length === 2) {
+                    let turn = ++ games[room].turn
+                    
                     games[room].sockets.forEach((socket) => {
                         sockets[socket].emit("turn", {
-                            turn: 1,
+                            turn: turn,
                             field: field,
                             captured: field.captured
                         })
@@ -118,6 +120,9 @@ const socket = function (io) {
             })
 
             socket.on("turn", (data) => {
+                let room = sockets[socket.id].room
+                let field = games[room].field
+
                 let type = data.type
                 let piece = data.piece 
                 let start = data.start

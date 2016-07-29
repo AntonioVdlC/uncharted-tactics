@@ -6,7 +6,7 @@ const prepareFieldForPlacing = function (piece, field, playerNumber, socket) {
 
     let $info = document.getElementById("info")
 
-    if (piece.name === "King") {
+    if (piece.type === "King") {
         for (let i = 0; i < fieldLength; i++) {
             for (let j = 0; j < fieldWidth; j++) {
                 let $tile = document.getElementById(i + "-" + j)

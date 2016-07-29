@@ -1,3 +1,5 @@
+const dashify = require("dashify")
+
 const renderField = function (field) {
     let fieldLength = field.length
     let fieldWidth = field[0].length
@@ -8,7 +10,7 @@ const renderField = function (field) {
     for (let i = 0; i < fieldLength; i++) {
         fieldHTML += `<tr>`
         for (let j = 0; j < fieldWidth; j++) {
-            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${(field[i][j].piece) ? "<span data-name='" + field[i][j].piece.type + "' class='piece player-" + field[i][j].piece.player + " " + field[i][j].piece.type.toLocaleLowerCase().replace(/ /g, "-") + "'>" + field[i][j].piece.type + "</span>" : ""}</td>`
+            fieldHTML += `<td id="${i}-${j}" class="tile ${field[i][j].type}">${(field[i][j].piece) ? "<span data-type='" + field[i][j].piece.type + "' class='piece player-" + field[i][j].piece.player + " " + dashify(field[i][j].piece.type) + "'>" + field[i][j].piece.type + "</span>" : ""}</td>`
         }
         fieldHTML += `</tr>`
     }

@@ -1,7 +1,8 @@
 const pieces = [
     {
-        "name": "Pawn",
+        "type": "Pawn",
         "value": 1,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -56,8 +57,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Slinger",
+        "type": "Slinger",
         "value": 2,
+        "infighting": false,
         "action": {
             "plain": [
                 [
@@ -152,8 +154,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Lancer",
+        "type": "Lancer",
         "value": 2,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -208,8 +211,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Archer",
+        "type": "Archer",
         "value": 3,
+        "infighting": false,
         "action": {
             "plain": [
                 [
@@ -304,8 +308,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Lord",
+        "type": "Lord",
         "value": 3,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -360,8 +365,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Knight",
+        "type": "Knight",
         "value": 3,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -456,8 +462,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Bishop",
+        "type": "Bishop",
         "value": 3,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -512,8 +519,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Tower",
+        "type": "Tower",
         "value": 4,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -568,8 +576,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "Royal Guard",
+        "type": "Royal Guard",
         "value": 4,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -624,8 +633,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "General",
+        "type": "General",
         "value": 5,
+        "infighting": true,
         "action": {
             "plain": [
                 [
@@ -680,8 +690,9 @@ const pieces = [
             ]
         }
     },{
-        "name": "King",
+        "type": "King",
         "value": 0,
+        "infighting": true,
         "action": {
             "plain": [
                 [

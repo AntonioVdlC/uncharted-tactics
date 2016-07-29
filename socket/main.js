@@ -76,7 +76,9 @@ const socket = function (io) {
                 
                 field = updateField(field, {
                     type: "move", 
-                    piece: "King",
+                    piece: {
+                        type: "King"
+                    },
                     player: (games[room].sockets.indexOf(socket.id) + 1 === 1) ? 2 : 1,
                     start: null, 
                     end: position

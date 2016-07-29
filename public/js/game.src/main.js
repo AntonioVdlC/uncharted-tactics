@@ -46,7 +46,7 @@ socket.on("game", (data) => {
     }
 
     document.getElementById("place-king").addEventListener("click", function (e) {
-        let piece = pieces.find(piece => piece.name === "King")
+        let piece = pieces.find(piece => piece.type === "King")
         this.remove()
         prepareFieldForPlacing(piece, field, playerNumber, socket)
     })
@@ -66,16 +66,16 @@ socket.on("game", (data) => {
             <div class="pieces-container" id="pieces-container">
                   ${pieces.filter((piece) => piece.value).map((piece) => {
                       return `
-                        <span class="piece player-${playerNumber} ${dashify(piece.name)}" id="piece-select-${dashify(piece.name)}" data-name="${dashify(piece.name)}">
-                            ${piece.name}
+                        <span class="piece player-${playerNumber} ${dashify(piece.type)}" id="piece-select-${dashify(piece.type)}" data-type="${dashify(piece.type)}">
+                            ${piece.type}
                         </span>`
                   })}
             </div>
         `
         Array.from(document.querySelectorAll(".piece")).forEach((piece) => {
             piece.addEventListener("click", (e) => {
-                let name = e.target.dataset.name
-                let piece = pieces.find(piece => dashify(piece.name) === name)
+                let type = e.target.dataset.type
+                let piece = pieces.find(piece => dashify(piece.type) === type)
                 
                 addPiece(piece, field, playerNumber, socket)
             })
@@ -95,7 +95,7 @@ socket.on("game", (data) => {
         $capture2.innerHTML = renderCaptured(captured[1])
 
         // Attach move and capture event handlers
-        document.querySelector("table.field").addEventListener("click", (e) => handlePieceActions(e, field, socket))
+        document.querySelector("table.field").addEventListener("click", (e) => handlePieceActions(e, field, pieces, socket))
 
         // Turn
         if (
@@ -108,7 +108,7 @@ socket.on("game", (data) => {
             Array.from(document.querySelectorAll(".piece.player-" + playerNumber)).forEach(($piece) => {
                 $piece.addEventListener("click", (e) => {
                     // Retrieve info
-                    let piece = pieces.find(piece => piece.name === e.target.dataset.name)
+                    let piece = pieces.find(piece => piece.type === e.target.dataset.type)
                     let position = {
                         i: parseInt(e.target.parentNode.id.split("-")[0], 10),
                         j: parseInt(e.target.parentNode.id.split("-")[1], 10)

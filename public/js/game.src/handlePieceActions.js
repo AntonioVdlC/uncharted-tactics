@@ -1,4 +1,4 @@
-const handlePieceActions = function (e, field, socket) {
+const handlePieceActions = function (e, field, pieces, socket) {
     let $selected = document.querySelector(".selected")
 
     let startTileId = $selected.id
@@ -13,7 +13,7 @@ const handlePieceActions = function (e, field, socket) {
         j: parseInt(endTileId.split("-")[1], 10)
     }
 
-    let piece = $selected.children[0].dataset.name
+    let piece = pieces.find(piece => piece.type === $selected.children[0].dataset.type)
 
     if (e.target && e.target.matches(".move")) {
         socket.emit("turn", {

@@ -13,14 +13,14 @@ const addPiece = function (piece, field, playerNumber, socket) {
         let $capture = document.getElementById("capture-player-" + playerNumber)
 
         // Limit of 1 General and 2 Royal Guards
-        if (piece.name === "General") {
+        if (piece.type === "General") {
             document.getElementById("piece-select-general").remove()
         }
-        if (piece.name === "Royal Guard" && $capture.innerHTML.indexOf("Royal Guard") > -1) {
+        if (piece.type === "Royal Guard" && $capture.innerHTML.indexOf("Royal Guard") > -1) {
             document.getElementById("piece-select-royal-guard").remove()
         }
 
-        $capture.innerHTML += `<p><span data-name="${piece.name}" class="piece player-${playerNumber} ${dashify(piece.name)}">${piece.name}</span></p>`
+        $capture.innerHTML += `<p><span data-type="${piece.type}" class="piece player-${playerNumber} ${dashify(piece.type)}">${piece.type}</span></p>`
     }
     
     if (availablePoints > 0) {
@@ -59,7 +59,7 @@ const addPiece = function (piece, field, playerNumber, socket) {
 
         Array.from(document.querySelectorAll("#capture-player-" + playerNumber + " p")).forEach((piece) => {
             piece.addEventListener("click", function (e) {
-                let piece = e.target.dataset.name
+                let piece = e.target.dataset.type
                 this.remove()
                 prepareFieldForPlacing(piece, field, playerNumber, socket)
             })

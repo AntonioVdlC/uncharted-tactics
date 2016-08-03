@@ -1,0 +1,60 @@
+const royalGuard = {
+    "type": "Royal Guard",
+    "value": 4,
+    "infighting": true,
+    "action": {
+        "plain": [
+            [
+                {move: true, capture: true}, 
+                {move: true, capture: true}, 
+                {move: true, capture: true}
+            ],
+            [
+                {move: true, capture: true}, 
+                {move: false, capture: false}, 
+                {move: true, capture: true}
+            ],
+            [
+                {move: false, capture: false}, 
+                {move: true, capture: true}, 
+                {move: false, capture: false}
+            ]
+        ],
+        "hill": [
+            [
+                {move: true, capture: true}, 
+                {move: true, capture: true}, 
+                {move: true, capture: true}
+            ],
+            [
+                {move: true, capture: true}, 
+                {move: false, capture: false}, 
+                {move: true, capture: true}
+            ],
+            [
+                {move: false, capture: false}, 
+                {move: true, capture: true}, 
+                {move: false, capture: false}
+            ]
+        ],
+        "river": [
+            [
+                {move: false, capture: false}, 
+                {move: true, capture: false}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: false}
+            ]
+        ]
+    }
+}
+
+module.exports = royalGuard

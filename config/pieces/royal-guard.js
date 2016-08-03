@@ -15,9 +15,9 @@ const royalGuard = {
                 {move: true, capture: true}
             ],
             [
-                {move: false, capture: false}, 
                 {move: true, capture: true}, 
-                {move: false, capture: false}
+                {move: true, capture: true}, 
+                {move: true, capture: true}
             ]
         ],
         "hill": [
@@ -32,9 +32,9 @@ const royalGuard = {
                 {move: true, capture: true}
             ],
             [
-                {move: false, capture: false}, 
                 {move: true, capture: true}, 
-                {move: false, capture: false}
+                {move: true, capture: true}, 
+                {move: true, capture: true}
             ]
         ],
         "river": [

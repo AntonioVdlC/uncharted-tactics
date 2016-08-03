@@ -5,16 +5,36 @@ const lancer = {
     "action": {
         "plain": [
             [
+                {move: false, capture: false},
                 {move: false, capture: false}, 
                 {move: true, capture: true}, 
+                {move: false, capture: false},
                 {move: false, capture: false}
             ],
             [
+                {move: false, capture: false},
+                {move: false, capture: false}, 
+                {move: true, capture: true}, 
+                {move: false, capture: false},
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false},
+                {move: false, capture: false},
                 {move: false, capture: false}, 
                 {move: false, capture: false}, 
                 {move: false, capture: false}
             ],
             [
+                {move: false, capture: false},
+                {move: false, capture: false},
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false},
+                {move: false, capture: false},
                 {move: false, capture: false}, 
                 {move: false, capture: false}, 
                 {move: false, capture: false}

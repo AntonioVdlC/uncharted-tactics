@@ -6,34 +6,54 @@ const bishop = {
         "plain": [
             [
                 {move: true, capture: true}, 
+                {move: false, capture: false},
+                {move: false, capture: false},
                 {move: false, capture: false}, 
                 {move: true, capture: true}
             ],
             [
                 {move: false, capture: false}, 
+                {move: true, capture: true},
+                {move: false, capture: false},
+                {move: true, capture: true}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false},
+                {move: false, capture: false},
+                {move: false, capture: false}, 
                 {move: false, capture: false}, 
                 {move: false, capture: false}
             ],
             [
-                {move: true, capture: true}, 
                 {move: false, capture: false}, 
+                {move: true, capture: true},
+                {move: false, capture: false},
+                {move: true, capture: true}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: true, capture: true}, 
+                {move: false, capture: false},
+                {move: false, capture: false},
+                {move: false, capture: false}, 
                 {move: true, capture: true}
             ]
         ],
         "hill": [
             [
                 {move: true, capture: true}, 
-                {move: false, capture: false}, 
+                {move: false, capture: false},
                 {move: true, capture: true}
             ],
             [
-                {move: false, capture: false}, 
+                {move: false, capture: false},
                 {move: false, capture: false}, 
                 {move: false, capture: false}
             ],
-            [
-                {move: true, capture: true}, 
-                {move: false, capture: false}, 
+            [ 
+                {move: true, capture: true},
+                {move: false, capture: false},
                 {move: true, capture: true}
             ]
         ],

@@ -42,34 +42,62 @@ const archer = {
         ],
         "hill": [
             [
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
                 {move: false, capture: true}, 
                 {move: false, capture: true}, 
                 {move: false, capture: true}, 
-                {move: false, capture: true}, 
-                {move: false, capture: true}
-            ],
-            [
-                {move: false, capture: true}, 
-                {move: false, capture: false}, 
-                {move: true, capture: false}, 
-                {move: false, capture: false}, 
-                {move: false, capture: true}
-            ],
-            [
-                {move: false, capture: true}, 
-                {move: true, capture: false}, 
-                {move: false, capture: false}, 
-                {move: true, capture: false}, 
-                {move: false, capture: true}
-            ],
-            [
-                {move: false, capture: false}, 
-                {move: false, capture: false}, 
-                {move: true, capture: false}, 
                 {move: false, capture: false}, 
                 {move: false, capture: false}
             ],
             [
+                {move: false, capture: false}, 
+                {move: false, capture: true}, 
+                {move: false, capture: true}, 
+                {move: false, capture: true}, 
+                {move: false, capture: true}, 
+                {move: false, capture: true}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: true}, 
+                {move: false, capture: true}, 
+                {move: false, capture: false}, 
+                {move: true, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: true}, 
+                {move: false, capture: true}
+            ],
+            [
+                {move: false, capture: true}, 
+                {move: false, capture: true}, 
+                {move: true, capture: false}, 
+                {move: false, capture: false}, 
+                {move: true, capture: false}, 
+                {move: false, capture: true}, 
+                {move: false, capture: true}
+            ],
+            [
+                {move: false, capture: false},
+                {move: false, capture: false},
+                {move: false, capture: false}, 
+                {move: true, capture: false},  
+                {move: false, capture: false},
+                {move: false, capture: false}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false},
+                {move: false, capture: false},
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: false}, 
+                {move: false, capture: false}
+            ],
+            [
+                {move: false, capture: false},
+                {move: false, capture: false},
                 {move: false, capture: false}, 
                 {move: false, capture: false}, 
                 {move: false, capture: false}, 

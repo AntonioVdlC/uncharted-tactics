@@ -152,7 +152,17 @@ const socket = function (io) {
             socket.on("disconnect", () => {
                 console.log("OUT :: " + socket.request.session.player.name)
                 
-                delete sockets[socket.id]
+                let room = sockets[socket.id].room
+
+                games[room].sockets.forEach((s) => {
+                    if (s !== socket.id) {
+                        sockets[s].emit("victory")
+                        sockets[s].disconnect()
+                    }
+                    delete sockets[s]
+                })
+
+                delete games[room]
             })
         }
     })

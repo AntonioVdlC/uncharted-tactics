@@ -130,4 +130,12 @@ socket.on("game", (data) => {
             })
         }
     })
+
+    // Game Over
+    socket.on("victory", (data) => {
+        $info.innerHTML = `Victory - <a href="/">Click Here</a>`        
+    })
+    socket.on("defeat", (data) => {
+        $info.innerHTML = `Defeat - <a href="/">Click Here</a>`     
+    })
 })
